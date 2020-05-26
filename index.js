@@ -23,7 +23,11 @@ app.get('/article/:country', function (req, res) {
     try {
         db.collection('articles').doc(req.params.country).get()
             .then((snapshot) => {
-                res.send(snapshot.data());
+                if(snapshot.data() === undefined){
+                    res.send("0");
+                }else{
+                    res.send(snapshot.data());
+                }
             })
             .catch((err) => {
                 console.log('Error getting documents', err);
@@ -38,7 +42,11 @@ app.get('/color/:color', function (req, res) {
     try {
         db.collection('colors').doc(req.params.color).get()
             .then((snapshot) => {
-                res.send(snapshot.data());
+                if(snapshot.data() === undefined){
+                    res.send("0")
+                }else{
+                    res.send(snapshot.data());
+                }
             })
             .catch((err) => {
                 console.log('Error getting documents', err);
