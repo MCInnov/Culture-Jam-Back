@@ -12,24 +12,12 @@ const db = admin.firestore();
 
 // Route de l'API
 app.get('/', function (req, res) {
-    res.send('Culture Jam API (v1.0.0) \n /ping \n /article/:article \n /color/:color')
+    res.send('Culture Jam API (v1.0.0) <br> /ping <br> /article/:article <br> /color/:color')
 })
 
 app.get('/ping', function (req, res) {
     res.send('pong')
 })
-
-// app.get('/test', function (req, res){
-//     db.collection('articles').doc('FR').get()
-//         .then((snapshot) => {
-//             console.log(snapshot.data());
-//             res.send(snapshot.data());
-//         })
-//         .catch((err) => {
-//             console.log('Error getting documents', err);
-//             res.send("Not found data !")
-//         });
-// })
 
 app.get('/article/:country', function (req, res) {
     try {
