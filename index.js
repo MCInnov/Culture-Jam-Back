@@ -73,7 +73,7 @@ app.get('/colors/:color', function (req, res) {
 
 })
 
-app.listen(3000, function () {
+app.listen((process.env.PORT || 3000), function () {
     console.log('CULTURE JAM (v1.0.0)')
     console.log('Server <START>')
     console.log('Port : 3000')
