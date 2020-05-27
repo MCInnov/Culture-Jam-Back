@@ -11,16 +11,21 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
+var corsOptions = {
+    origin: 'https://mcynov.gitlab.io/culture-jam/',
+    optionsSuccessStatus: 200
+}
+
 // Route de l'API
-app.get('/', function (req, res) {
+app.get('/', cors(corsOptions), function (req, res) {
     res.send('Culture Jam API (v1.0.0) <br> /ping <br> /article/:article <br> /color/:color')
 })
 
-app.get('/ping', function (req, res) {
+app.get('/ping', cors(corsOptions), function (req, res) {
     res.send('pong')
 })
 
-app.get('/article/:country', function (req, res) {
+app.get('/article/:country', cors(corsOptions), function (req, res) {
     try {
         db.collection('articles').doc(req.params.country).get()
             .then((snapshot) => {
@@ -39,7 +44,7 @@ app.get('/article/:country', function (req, res) {
     }  
 })
 
-app.get('/color/:color', function (req, res) {
+app.get('/color/:color', cors(corsOptions), function (req, res) {
     try {
         db.collection('colors').doc(req.params.color).get()
             .then((snapshot) => {
@@ -58,7 +63,7 @@ app.get('/color/:color', function (req, res) {
     }
 })
 
-app.use(cors({ origin: true, credentials:true }));
+// app.use(cors({ origin: true, credentials:true }));
 app.listen((process.env.PORT || 3000), function () {
     console.log('CULTURE JAM API (v1.0.0)')
     console.log('Server <START>')
