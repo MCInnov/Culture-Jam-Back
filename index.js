@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const cors = require('cors');
+// const cors = require('cors');
 const admin = require("firebase-admin");
 
 // Initialisation de firestore
@@ -11,21 +11,36 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-var corsOptions = {
-    origin: 'https://mcynov.gitlab.io/culture-jam/',
-    optionsSuccessStatus: 200
-}
+// var corsOptions = {
+//     origin: 'https://mcynov.gitlab.io/culture-jam/',
+//     optionsSuccessStatus: 200
+// }
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
+    // authorized headers for preflight requests
+    // https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+
+    app.options('*', (req, res) => {
+        // allowed XHR methods  
+        res.header('Access-Control-Allow-Methods', 'GET');
+        res.send();
+    });
+});
 
 // Route de l'API
-app.get('/', cors(corsOptions), function (req, res) {
+app.get('/', function (req, res) {
     res.send('Culture Jam API (v1.0.0) <br> /ping <br> /article/:article <br> /color/:color')
 })
 
-app.get('/ping', cors(corsOptions), function (req, res) {
+app.get('/ping', function (req, res) {
     res.send('pong')
 })
 
-app.get('/article/:country', cors(corsOptions), function (req, res) {
+app.get('/article/:country', function (req, res) {
     try {
         db.collection('articles').doc(req.params.country).get()
             .then((snapshot) => {
@@ -44,7 +59,7 @@ app.get('/article/:country', cors(corsOptions), function (req, res) {
     }  
 })
 
-app.get('/color/:color', cors(corsOptions), function (req, res) {
+app.get('/color/:color', function (req, res) {
     try {
         db.collection('colors').doc(req.params.color).get()
             .then((snapshot) => {
