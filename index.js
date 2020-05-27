@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors');
 const admin = require("firebase-admin");
 
 // Initialisation de firestore
@@ -57,6 +58,7 @@ app.get('/color/:color', function (req, res) {
     }
 })
 
+app.use(cors({ origin: true, credentials:true }));
 app.listen((process.env.PORT || 3000), function () {
     console.log('CULTURE JAM API (v1.0.0)')
     console.log('Server <START>')
