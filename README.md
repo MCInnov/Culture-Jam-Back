@@ -2,7 +2,7 @@
 
 Par Jade LLANES et Maximilien COSTA
 
-C'est une API à usage unique pour l'application [Culture Jam](https://mcynov.gitlab.io/culture-jam/)
+C'est une API réaliser en Node.js avec un serveur Express, à usage unique pour l'application [Culture Jam](https://mcynov.gitlab.io/culture-jam/)
 
 #### Routes de l'API
 
