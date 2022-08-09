@@ -8,7 +8,7 @@ C'est une API à usage unique pour l'application [Culture Jam](https://mcynov.gi
 
 Route  | Méthode | Description
 -------|---------|-------------
-/ping  | GET | Test si la l'api est fonctionnelle
-/article/:article | GET | Récupère un article en fonction son id
+/ping  | GET | Test si l'api est fonctionnelle
+/article/:article | GET | Récupère un article en fonction de son id
 /color/:color | GET | Récupère la signification d'une couleur en fonction de son id
  
